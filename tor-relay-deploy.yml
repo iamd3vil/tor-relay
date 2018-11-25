@@ -1,0 +1,43 @@
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tor-relay
+spec:
+  selector:
+    matchLabels:
+      app: tor-relay
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: tor-relay
+    spec:
+      containers:
+      - name: tor-relay
+        image: iamd3vil/tor-relay:v1.0.1
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 9001
+        resources:
+          limits:
+            cpu: "0.4"
+          requests:
+            cpu: "0.2"
+
+---
+
+apiVersion:  v1
+kind: Service
+metadata:
+  name: tor-relay-service
+spec:
+  selector:
+    app: tor-relay
+  type: NodePort
+  ports:
+  - protocol: TCP
+    port: 9001
+    nodePort: 30111
+    targetPort: 9001

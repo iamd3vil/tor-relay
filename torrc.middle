@@ -1,0 +1,8 @@
+ORPort 9001
+## A handle for your relay, so people don't have to refer to it by key.
+Nickname iamd3vilrelay
+ContactInfo tor at saratchandra.in
+ExitRelay 0
+AccountingMax 400 GBytes
+AccountingRule sum
+AccountingStart month 1 00:00
