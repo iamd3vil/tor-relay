@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: tor-relay
-        image: iamd3vil/tor-relay:v1.0.1
+        image: iamd3vil/tor-relay:v1.0.2
         imagePullPolicy: Always
         ports:
         - containerPort: 9001
