@@ -1,4 +1,7 @@
 ORPort 9001
+User root
+DataDirectory /var/lib/tor
+
 ## A handle for your relay, so people don't have to refer to it by key.
 Nickname iamd3vilrelay
 ContactInfo tor at saratchandra.in

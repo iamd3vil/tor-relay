@@ -1,3 +1,16 @@
+# Persistent Volume Claim for digitalocean block storage
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: tor-relay-pvc
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 3Gi
+  storageClassName: do-block-storage
+
 ---
 
 apiVersion: apps/v1
@@ -16,15 +29,22 @@ spec:
     spec:
       containers:
       - name: tor-relay
-        image: iamd3vil/tor-relay:v1.0.2
+        image: iamd3vil/tor-relay:v1.0.5
         imagePullPolicy: Always
         ports:
         - containerPort: 9001
+        volumeMounts:
+        - mountPath: "/var/lib/tor"
+          name: tor-volume
         resources:
           limits:
             cpu: "0.4"
           requests:
             cpu: "0.2"
+      volumes:
+      - name: tor-volume
+        persistentVolumeClaim:
+          claimName: tor-relay-pvc
 
 ---
 

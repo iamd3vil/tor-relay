@@ -13,9 +13,6 @@ EXPOSE 9001
 # copy in our torrc files
 COPY torrc.middle /etc/tor/torrc
 
-# make sure files are owned by tor user
-RUN chown -R tor /etc/tor
-
-USER tor
+USER root
 
 ENTRYPOINT [ "tor" ]
